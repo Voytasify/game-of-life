@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameOfLife"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid x:Name="GameBoard" />
+        Title="MainWindow" Height="720" Width="1280">
+    <StackPanel>
+        <Grid x:Name="BoardGrid" />
+    </StackPanel>
 </Window>
