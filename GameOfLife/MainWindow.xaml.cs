@@ -25,8 +25,19 @@ namespace GameOfLife
         public MainWindow()
         {
             InitializeComponent();
-            gameBoard = new GameBoard(BoardGrid);
+            this.gameBoard = new GameBoard(this.BoardGrid);
         }
 
+        private void MenuItem_ChangeBoardDim_OnClick(object sender, RoutedEventArgs e)
+        {
+
+           this.BoardGrid.Children.Clear();
+           this.gameBoard = new GameBoard(this.BoardGrid, 10, 10);
+        }
+
+        private void ButtonIterate_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.gameBoard.Iterate();
+        }
     }
 }

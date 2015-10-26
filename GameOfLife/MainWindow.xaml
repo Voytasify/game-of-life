@@ -6,7 +6,32 @@
         xmlns:local="clr-namespace:GameOfLife"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280">
-    <StackPanel>
+    <StackPanel Orientation="Vertical">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Plik">
+                <MenuItem Header="_Wczytaj stan początkowy"></MenuItem>
+                <MenuItem Header="_Zapisz stan początkowy"></MenuItem>
+                <MenuItem Header="_Wyjście"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Ustawienia">
+                <MenuItem Header="_Wyliczanie">
+                    <MenuItem Header="_Zmień skok w pojedynczej iteracji" />
+                </MenuItem>
+                <MenuItem Header="_Plansza">
+                    <MenuItem Header="_Zmień rozmiar" Click="MenuItem_ChangeBoardDim_OnClick"/>
+                </MenuItem>
+                <MenuItem Header="_Wygląd">
+                    <MenuItem Header="_Dodatkowe wyróżenienia" IsCheckable="True"/>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
         <Grid x:Name="BoardGrid" />
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Iteruj" Click="ButtonIterate_OnClick"></Button>
+            <TextBlock>Rozmiar planszy:</TextBlock>
+            <TextBlock>20 x 10</TextBlock>
+            <TextBlock>Skok:</TextBlock>
+            <TextBlock>5</TextBlock>
+        </StackPanel>
     </StackPanel>
 </Window>

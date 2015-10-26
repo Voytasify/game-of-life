@@ -15,14 +15,17 @@ namespace GameOfLife
 {
     class GameBoard
     {
-        public Cell[,] Cells { get; set; }
+        public int IterationCounter { get; set; }
 
+        private Cell[,] Cells;
         private Grid grid;
         private int width;
         private int height;
 
         public GameBoard(Grid g, int w = 20, int h = 20)
         {
+            this.IterationCounter = 0;
+
             this.grid = g;
             this.width = w;
             this.height = h;
@@ -106,6 +109,8 @@ namespace GameOfLife
                     }
                 }
             }
+
+            this.IterationCounter += numberOfIterations;
         }
 
         private Cell[,] GetBoardCopy()
