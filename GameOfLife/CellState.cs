@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    class CellType
+    enum CellState
     {
+        Live,
+        Dead
     }
 }
