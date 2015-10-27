@@ -5,23 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameOfLife"
         mc:Ignorable="d"
-        Title="Game Of Life" Height="780" Width="1280" ResizeMode="CanMinimize">
+        Title="Game Of Life" Height="800" Width="1280" ResizeMode="CanMinimize">
     
     <StackPanel Orientation="Vertical">
         
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_Plik">
-                <MenuItem Header="_Wczytaj stan początkowy" Click="MenuItem_LoadGameState_OnClick"></MenuItem>
-                <MenuItem Header="_Zapisz stan początkowy" Click="MenuItem_SaveGameState_OnClick"></MenuItem>
-                <MenuItem Header="_Wyjście" Click="MenuItem_Exit_OnClick"></MenuItem>
+        <Menu DockPanel.Dock="Top" Height="30">
+            <MenuItem Header="_Plik" Height="30" FontSize="16" FontWeight="Heavy">
+                <MenuItem Header="_Wczytaj stan początkowy" Click="MenuItem_LoadGameState_OnClick" FontSize="14" FontWeight="Medium"></MenuItem>
+                <MenuItem Header="_Zapisz stan początkowy" Click="MenuItem_SaveGameState_OnClick" FontSize="14" FontWeight="Medium"></MenuItem>
+                <MenuItem Header="_Wyjście" Click="MenuItem_Exit_OnClick" FontSize="14" FontWeight="Medium"></MenuItem>
             </MenuItem>
-            <MenuItem Header="_Ustawienia">
-                <MenuItem Header="_Wygląd">
+            <MenuItem Header="_Ustawienia" Height="30" FontSize="16" FontWeight="Heavy">
+                <MenuItem Header="_Wygląd" FontSize="14" FontWeight="Medium">
                     <MenuItem Header="_Pokaż umierające komórki" Click="MenuItem_HighlightDyingCells_OnClick"></MenuItem>
                     <MenuItem Header="_Pokaż nowonarodzone komórki" Click="MenuItem_HighlightNewbornCells_OnClick"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="_Wielkość skoku" Click="MenuItem_ChangeGenerationLeap_OnClick"/>
-                <MenuItem Header="_Wymiary planszy" Click="MenuItem_ChangeBoardDimensions_OnClick"/>
+                <MenuItem Header="_Wielkość skoku" Click="MenuItem_ChangeGenerationLeap_OnClick" FontSize="14" FontWeight="Medium"/>
+                <MenuItem Header="_Wymiary planszy" Click="MenuItem_ChangeBoardDimensions_OnClick" FontSize="14" FontWeight="Medium"/>
             </MenuItem>
         </Menu>
         
@@ -31,25 +31,26 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="24"></RowDefinition>
-                <RowDefinition Height="24"></RowDefinition>
+                <RowDefinition Height="28"></RowDefinition>
+                <RowDefinition Height="28"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Label Grid.Column="0" Grid.Row="0" Content="ITERACJA " HorizontalAlignment="Center" Margin="0,0,0,0" />
-            <Label Grid.Column="0" Grid.Row="1" Content="{Binding IterationCounter}" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+            <Label Grid.Column="0" Grid.Row="0" Content="ITERACJA " HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="16" FontWeight="Heavy"/>
+            <Label Grid.Column="0" Grid.Row="1" Content="{Binding IterationCounter}" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="16" FontWeight="Medium"/>
         </Grid>
         
-        <Grid x:Name="BoardGrid" Margin="10,10,10,20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid x:Name="BoardGrid" Margin="10,10,10,20" HorizontalAlignment="Center" VerticalAlignment="Center" Background="DarkSalmon" />
 
-        <Grid Margin="10,20,10,10">
+        <Grid Margin="30,20,30,20" Background="Linen">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="600"></ColumnDefinition>
+                <ColumnDefinition Width="340"></ColumnDefinition>
+                <ColumnDefinition Width="160"></ColumnDefinition>
                 <ColumnDefinition Width="50"></ColumnDefinition>
-                <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition Width="36"></ColumnDefinition>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="40"></ColumnDefinition>
                 <ColumnDefinition Width="16"></ColumnDefinition>
-                <ColumnDefinition Width="36"></ColumnDefinition>
+                <ColumnDefinition Width="40"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -57,14 +58,15 @@
                 <RowDefinition Height="36"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="5,5,5,5" Content="Iteruj" Click="ButtonIterate_OnClick" VerticalAlignment="Center" HorizontalAlignment="Right" Height="36" Width="150"></Button>
-            <Label Grid.Column="2" Grid.Row="0" Content="Wymiary planszy:"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0" />
-            <Label Grid.Column="2" Grid.Row="1" Content="Wielkość skoku:" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0"/>
-            <Label Grid.Column="3" Grid.Row="0" Content="{Binding BoardWidth}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" />
-            <Label Grid.Column="4" Grid.Row="0" Content="x" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"/>
-            <Label Grid.Column="5" Grid.Row="0" Content="{Binding BoardHeight}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" />
-            <Label Grid.Column="3" Grid.Row="1" Content="{Binding GenerationLeap}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+            <Button Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="5,5,5,5" Content="Iteruj" Click="ButtonIterate_OnClick" VerticalAlignment="Center" HorizontalAlignment="Right" Height="36" Width="150" FontSize="16" FontWeight="Heavy"></Button>
+            <Button Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="5,5,5,5" Content="Czyść" Click="ButtonClear_OnClick" VerticalAlignment="Center" HorizontalAlignment="Right" Height="36" Width="150" FontSize="16" FontWeight="Heavy"></Button>
+            <Label Grid.Column="3" Grid.Row="0" Content="Wymiary planszy:"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
+            <Label Grid.Column="3" Grid.Row="1" Content="Wielkość skoku:" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
+            <Label Grid.Column="4" Grid.Row="0" Content="{Binding BoardWidth}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
+            <Label Grid.Column="5" Grid.Row="0" Content="x" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
+            <Label Grid.Column="6" Grid.Row="0" Content="{Binding BoardHeight}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
+            <Label Grid.Column="4" Grid.Row="1" Content="{Binding GenerationLeap}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
         </Grid>
-  
+        
     </StackPanel>
 </Window>

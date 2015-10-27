@@ -8,7 +8,7 @@
         Title="Wielkość skoku" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="110"></ColumnDefinition>
             <ColumnDefinition Width="100"></ColumnDefinition>
             <ColumnDefinition Width="100"></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -17,9 +17,9 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0" Content="Liczba pokoleń:"></Label>
-        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Margin="0,5,5,5" Name="TextBoxGenLeap"></TextBox>
-        <Button Grid.Column="1" Grid.Row="2" Margin="5,5,5,5" Name="ButtonOk" Click="ButtonOk_Click" IsDefault="True">OK</Button>
-        <Button Grid.Column="2" Grid.Row="2" Margin="5,5,5,5" Name="ButtonCancel" Click="ButtonCancel_OnClick" IsCancel="True">Anuluj</Button>
+        <Label Grid.Column="0" Grid.Row="0" Content="Liczba pokoleń:" FontSize="14" FontWeight="Medium"></Label>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Margin="0,5,5,5" Name="TextBoxGenLeap" FontSize="14" FontWeight="Light"></TextBox>
+        <Button Grid.Column="1" Grid.Row="2" Margin="5,5,5,5" Name="ButtonOk" Click="ButtonOk_Click" IsDefault="True" FontSize="14" FontWeight="Medium">OK</Button>
+        <Button Grid.Column="2" Grid.Row="2" Margin="5,5,5,5" Name="ButtonCancel" Click="ButtonCancel_OnClick" IsCancel="True" FontSize="14" FontWeight="Medium">Anuluj</Button>
     </Grid>
 </Window>

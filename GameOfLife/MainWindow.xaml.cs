@@ -189,5 +189,13 @@ namespace GameOfLife
         {
             gameBoard.HighlightNewbornCells();
         }
+
+        private void ButtonClear_OnClick(object sender, RoutedEventArgs e)
+        {
+            ClearBoardGrid();
+            ResetIterationCounter();
+
+            gameBoard = new GameBoard(BoardGrid, BoardWidth, BoardHeight);
+        }
     }
 }
