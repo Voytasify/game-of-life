@@ -72,12 +72,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\DisplayMode.cs" />
     <Compile Include="UserDialogBoxes\BoardDimDialogBox.xaml.cs">
       <DependentUpon>BoardDimDialogBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Cell.cs" />
-    <Compile Include="CellState.cs" />
-    <Compile Include="GameBoard.cs" />
+    <Compile Include="Utilities\Cell.cs" />
+    <Compile Include="Enums\CellState.cs" />
+    <Compile Include="Utilities\GameBoard.cs" />
     <Compile Include="UserDialogBoxes\GenLeapDialogBox.xaml.cs">
       <DependentUpon>GenLeapDialogBox.xaml</DependentUpon>
     </Compile>

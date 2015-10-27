@@ -32,7 +32,6 @@ namespace GameOfLife
         private int _boardWidth = MaxBoardWidth;
         private int _boardHeight = MaxBoardHeight;
         private int _generationLeap = 1;
-        private bool _cellDistinction = true;
         private int _iterationCounter = 0;
 
         public int BoardWidth
@@ -70,19 +69,6 @@ namespace GameOfLife
                 {
                     _generationLeap = value;
                     OnPropertyChanged("GenerationLeap");
-                }
-            }
-        }
-
-        public bool CellDistinction
-        {
-            get { return _cellDistinction; }
-            set
-            {
-                if (value != _cellDistinction)
-                {
-                    _cellDistinction = value;
-                    OnPropertyChanged("CellDistinction");
                 }
             }
         }
@@ -192,6 +178,16 @@ namespace GameOfLife
         {
             BoardWidth = width;
             BoardHeight = height;
+        }
+
+        private void MenuItem_HighlightDyingCells_OnClick(object sender, RoutedEventArgs e)
+        {
+            gameBoard.HighlightDyingCells();
+        }
+
+        private void MenuItem_HighlightNewbornCells_OnClick(object sender, RoutedEventArgs e)
+        {
+            gameBoard.HighlightNewbornCells();
         }
     }
 }

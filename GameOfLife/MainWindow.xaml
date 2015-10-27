@@ -16,9 +16,12 @@
                 <MenuItem Header="_Wyjście" Click="MenuItem_Exit_OnClick"></MenuItem>
             </MenuItem>
             <MenuItem Header="_Ustawienia">
+                <MenuItem Header="_Wygląd">
+                    <MenuItem Header="_Pokaż umierające komórki" Click="MenuItem_HighlightDyingCells_OnClick"></MenuItem>
+                    <MenuItem Header="_Pokaż nowonarodzone komórki" Click="MenuItem_HighlightNewbornCells_OnClick"></MenuItem>
+                </MenuItem>
                 <MenuItem Header="_Wielkość skoku" Click="MenuItem_ChangeGenerationLeap_OnClick"/>
                 <MenuItem Header="_Wymiary planszy" Click="MenuItem_ChangeBoardDimensions_OnClick"/>
-                <MenuItem Header="_Wyróżnienie rodzajów komórek" IsCheckable="True" IsChecked="{Binding CellDistinction}"/>
             </MenuItem>
         </Menu>
         
