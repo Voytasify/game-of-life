@@ -1,0 +1,23 @@
+﻿<Window x:Class="GameOfLife.BoardDimDialogBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GameOfLife"
+        mc:Ignorable="d"
+        Title="BoardDimDialogBox" Height="300" Width="300">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Szerokość</TextBlock>
+                <TextBox Name="TextBoxWidth" Width="40"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock>Wysokość</TextBlock>
+                <TextBox Name="TextBoxHeight" Width="40"></TextBox>
+            </StackPanel>
+            <Button Name="ButtonOk" Click="ButtonOk_Click" IsDefault="True">OK</Button>
+            <Button Name="ButtonCancel" Click="ButtonCancel_OnClick" IsCancel="True">Anuluj</Button>
+        </StackPanel>
+    </Grid>
+</Window>
