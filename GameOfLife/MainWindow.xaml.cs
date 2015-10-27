@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,8 +26,11 @@ namespace GameOfLife
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        private int _boardWidth = 60;
-        private int _boardHeight = 24;
+        private const int MaxBoardWidth = 60;
+        private const int MaxBoardHeight = 26;
+
+        private int _boardWidth = MaxBoardWidth;
+        private int _boardHeight = MaxBoardHeight;
         private int _generationLeap = 1;
         private bool _cellDistinction = true;
         private int _iterationCounter = 0;
@@ -188,11 +192,6 @@ namespace GameOfLife
         {
             BoardWidth = width;
             BoardHeight = height;
-        }
-
-        private void ButtonSimulate_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
         }
     }
 }
