@@ -26,9 +26,10 @@ namespace GameOfLife
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private int _boardWidth = 60;
-        private int _boardHeight = 30;
+        private int _boardHeight = 24;
         private int _generationLeap = 1;
         private bool _cellDistinction = true;
+        private int _iterationCounter = 0;
 
         public int BoardWidth
         {
@@ -82,6 +83,19 @@ namespace GameOfLife
             }
         }
 
+        public int IterationCounter
+        {
+            get { return _iterationCounter; }
+            set
+            {
+                if (value != _iterationCounter)
+                {
+                    _iterationCounter = value;
+                    OnPropertyChanged("IterationCounter");
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private GameBoard gameBoard;
@@ -106,6 +120,7 @@ namespace GameOfLife
 
             SetBoardDimensions(dlg.Width, dlg.Height);
             ClearBoardGrid();
+            ResetIterationCounter();
 
             gameBoard = new GameBoard(BoardGrid, BoardWidth, BoardHeight);
         }
@@ -122,6 +137,7 @@ namespace GameOfLife
         private void ButtonIterate_OnClick(object sender, RoutedEventArgs e)
         {
             gameBoard.Iterate(GenerationLeap);
+            IterationCounter += GenerationLeap;
         }
 
         private void MenuItem_Exit_OnClick(object sender, RoutedEventArgs e)
@@ -141,6 +157,7 @@ namespace GameOfLife
 
             SetBoardDimensions(gameState[0].Length, gameState.Length);
             ClearBoardGrid();
+            ResetIterationCounter();
 
             gameBoard = new GameBoard(BoardGrid, BoardWidth, BoardHeight, gameState);
         }
@@ -162,10 +179,20 @@ namespace GameOfLife
             BoardGrid.Children.Clear();
         }
 
+        public void ResetIterationCounter()
+        {
+            IterationCounter = 0;
+        }
+
         public void SetBoardDimensions(int width, int height)
         {
             BoardWidth = width;
             BoardHeight = height;
+        }
+
+        private void ButtonSimulate_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -11,8 +11,8 @@ namespace GameOfLife
     class Cell
     {
         public const double Size = 20.0;
-        public static SolidColorBrush BrushLive = Brushes.DarkViolet;
-        public static SolidColorBrush BrushDead = Brushes.Beige;
+        public static SolidColorBrush BrushLive = Brushes.Crimson;
+        public static SolidColorBrush BrushDead = Brushes.MintCream;
 
         public Rectangle Rectangle { get; set; }
 

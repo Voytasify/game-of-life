@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,13 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using GameOfLife.Annotations;
 
 namespace GameOfLife
 {
     class GameBoard
     {
-        public int IterationCounter { get; set; } = 0;
-
         private Cell[,] Cells;
         private int width;
         private int height;
@@ -58,7 +59,6 @@ namespace GameOfLife
             {
                 Iterate();
             }
-            IterationCounter += numberOfIterations;
         }
 
         public void Iterate()
@@ -87,8 +87,6 @@ namespace GameOfLife
                     }
                 }
             }
-
-            IterationCounter++;
         }
 
         private void SetupGrid(Grid grid)
@@ -173,7 +171,7 @@ namespace GameOfLife
                 .Count(p => board[(int) p.X, (int) p.Y].State == CellState.Live);
         }
 
-        private List<Point> GetNeighboursCoords(int x, int y)
+        private IEnumerable<Point> GetNeighboursCoords(int x, int y)
         {
             List<Point> points = new List<Point>();
 
@@ -187,6 +185,6 @@ namespace GameOfLife
             points.Add(new Point(x, y - 1));
 
             return points;
-        } 
+        }
     }
 }
