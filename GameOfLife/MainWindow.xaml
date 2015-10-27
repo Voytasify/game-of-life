@@ -9,19 +9,19 @@
     <StackPanel Orientation="Vertical">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Plik">
-                <MenuItem Header="_Wczytaj stan początkowy"></MenuItem>
-                <MenuItem Header="_Zapisz stan początkowy"></MenuItem>
-                <MenuItem Header="_Wyjście"></MenuItem>
+                <MenuItem Header="_Wczytaj stan początkowy" Click="MenuItem_LoadGameState_OnClick"></MenuItem>
+                <MenuItem Header="_Zapisz stan początkowy" Click="MenuItem_SaveGameState_OnClick"></MenuItem>
+                <MenuItem Header="_Wyjście" Click="MenuItem_Exit_OnClick"></MenuItem>
             </MenuItem>
             <MenuItem Header="_Ustawienia">
                 <MenuItem Header="_Wyliczanie">
-                    <MenuItem Header="_Zmień skok w pojedynczej iteracji" />
+                    <MenuItem Header="_Zmień skok pokoleniowy w pojedynczej iteracji" Click="MenuItem_ChangeGenerationLeap_OnClick"/>
                 </MenuItem>
                 <MenuItem Header="_Plansza">
-                    <MenuItem Header="_Zmień rozmiar" Click="MenuItem_ChangeBoardDim_OnClick"/>
+                    <MenuItem Header="_Zmień rozmiar" Click="MenuItem_ChangeBoardDimensions_OnClick"/>
                 </MenuItem>
                 <MenuItem Header="_Wygląd">
-                    <MenuItem Header="_Dodatkowe wyróżenienia" IsCheckable="True"/>
+                    <MenuItem Header="_Dodatkowe wyróżenienia" IsCheckable="True" IsChecked="{Binding CellDistinction}"/>
                 </MenuItem>
             </MenuItem>
         </Menu>
@@ -29,9 +29,11 @@
         <StackPanel Orientation="Horizontal">
             <Button Content="Iteruj" Click="ButtonIterate_OnClick"></Button>
             <TextBlock>Rozmiar planszy:</TextBlock>
-            <TextBlock>20 x 10</TextBlock>
+            <TextBlock Text="{Binding BoardWidth}"></TextBlock>
+            <TextBlock>x</TextBlock>
+            <TextBlock Text="{Binding BoardHeight}"></TextBlock>
             <TextBlock>Skok:</TextBlock>
-            <TextBlock>5</TextBlock>
+            <TextBlock Text="{Binding GenerationLeap}"></TextBlock>
         </StackPanel>
     </StackPanel>
 </Window>

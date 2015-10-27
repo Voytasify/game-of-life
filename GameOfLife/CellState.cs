@@ -8,7 +8,7 @@ namespace GameOfLife
 {
     enum CellState
     {
-        Live,
-        Dead
+        Dead,
+        Live
     }
 }

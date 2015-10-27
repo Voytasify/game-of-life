@@ -15,115 +15,150 @@ namespace GameOfLife
 {
     class GameBoard
     {
-        public int IterationCounter { get; set; }
+        public int IterationCounter { get; set; } = 0;
 
         private Cell[,] Cells;
-        private Grid grid;
         private int width;
         private int height;
 
-        public GameBoard(Grid g, int w = 20, int h = 20)
+        public GameBoard(Grid grid, int w, int h)
         {
-            this.IterationCounter = 0;
+            width = w;
+            height = h;
 
-            this.grid = g;
-            this.width = w;
-            this.height = h;
+            SetupGrid(grid);
+            SetupCells(grid);
+        }
 
-            this.grid.Width = this.width * Cell.Size;
-            this.grid.Height = this.height * Cell.Size;
+        public GameBoard(Grid grid, int w, int h, string[] gameState)
+            : this(grid, w, h)
+        {
+            SetState(gameState);
+        }
 
-            // add columns
-            for (int i = 0; i < this.width; i++)
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int x = 0; x < width; x++)
             {
-                this.grid.ColumnDefinitions.Add(new ColumnDefinition());
-                this.grid.ColumnDefinitions[i].Width = new GridLength(Cell.Size);
-            }
-
-            // add rows
-            for (int i = 0; i < this.height; i++)
-            {
-                this.grid.RowDefinitions.Add(new RowDefinition());
-                this.grid.RowDefinitions[i].Height = new GridLength(Cell.Size);
-            }
-
-            this.Cells = new Cell[this.width, this.height];
-
-            for (int x = 0; x < this.width; x++)
-            {
-                for (int y = 0; y < this.height; y++)
+                for (int y = 0; y < height; y++)
                 {
-                    this.Cells[x, y] = new Cell()
-                    {
-                        Rectangle = new Rectangle() { Height = Cell.Size, Width = Cell.Size, Stroke = Brushes.Black, StrokeThickness = 1 },
-                        State = CellState.Dead
-                    };
-                    this.Cells[x, y].Rectangle.MouseDown += OnMouseDown_Cell;
-
-                    this.grid.Children.Add(this.Cells[x, y].Rectangle);
-                    Grid.SetColumn(Cells[x, y].Rectangle, x);
-                    Grid.SetRow(Cells[x, y].Rectangle, y);
+                    sb.Append((int)Cells[x, y].State);
                 }
+                sb.Append(System.Environment.NewLine);
             }
 
+            return sb.ToString();
         }
 
-        ~GameBoard()
+        public void Iterate(int numberOfIterations)
         {
-         //   grid.Dispatcher.Invoke((Action)(() =>
-        //       grid.Children.Clear()));
+            for (int i = 0; i < numberOfIterations; i++)
+            {
+                Iterate();
+            }
+            IterationCounter += numberOfIterations;
         }
 
-        private void OnMouseDown_Cell(object sender, MouseButtonEventArgs mouseButtonEventArgs)
-        {
-            Rectangle r = sender as Rectangle;
-            r.Fill = Equals(r.Fill, Cell.BrushLive) ? Cell.BrushDead : Cell.BrushLive;
-        }
-
-        public void Iterate(int numberOfIterations = 1)
+        public void Iterate()
         {
             Cell[,] tmpBoard = GetBoardCopy();
 
-            for (int i = 0; i < numberOfIterations; i++)
+            for (int x = 0; x < width; x++)
             {
-                for (int x = 0; x < this.width; x++)
+                for (int y = 0; y < height; y++)
                 {
-                    for (int y = 0; y < this.height; y++)
-                    {
-                        int liveNeighboursCount = GetNumberOfLiveNeighbours(tmpBoard, x, y);
+                    int liveNeighboursCount = GetNumberOfLiveNeighbours(tmpBoard, x, y);
 
-                        if (tmpBoard[x, y].State == CellState.Live)
+                    if (tmpBoard[x, y].State == CellState.Live)
+                    {
+                        if (liveNeighboursCount < 2 || liveNeighboursCount > 3)
                         {
-                            if (liveNeighboursCount < 2 || liveNeighboursCount > 3)
-                            {
-                                this.Cells[x, y].State = CellState.Dead;
-                            }
+                            Cells[x, y].State = CellState.Dead;
                         }
-                        else
+                    }
+                    else
+                    {
+                        if (liveNeighboursCount == 3)
                         {
-                            if (liveNeighboursCount == 3)
-                            {
-                                this.Cells[x, y].State = CellState.Live;
-                            }
+                            Cells[x, y].State = CellState.Live;
                         }
                     }
                 }
             }
 
-            this.IterationCounter += numberOfIterations;
+            IterationCounter++;
+        }
+
+        private void SetupGrid(Grid grid)
+        {
+            grid.Width = width * Cell.Size;
+            grid.Height = height * Cell.Size;
+
+            // add columns
+            for (int i = 0; i < width; i++)
+            {
+                grid.ColumnDefinitions.Add(new ColumnDefinition());
+                grid.ColumnDefinitions[i].Width = new GridLength(Cell.Size);
+            }
+
+            // add rows
+            for (int i = 0; i < height; i++)
+            {
+                grid.RowDefinitions.Add(new RowDefinition());
+                grid.RowDefinitions[i].Height = new GridLength(Cell.Size);
+            }
+        }
+
+        private void SetupCells(Grid grid)
+        {
+            Cells = new Cell[width, height];
+
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    Cells[x, y] = new Cell()
+                    {
+                        Rectangle = new Rectangle() { Height = Cell.Size, Width = Cell.Size, Stroke = Brushes.Black, StrokeThickness = 1 },
+                        State = CellState.Dead
+                    };
+                    Cells[x, y].Rectangle.MouseDown += (sender, args) =>
+                    {
+                        Rectangle r = sender as Rectangle;
+                        r.Fill = Equals(r.Fill, Cell.BrushLive) ? Cell.BrushDead : Cell.BrushLive;
+                    };
+
+                    grid.Children.Add(Cells[x, y].Rectangle);
+                    Grid.SetColumn(Cells[x, y].Rectangle, x);
+                    Grid.SetRow(Cells[x, y].Rectangle, y);
+                }
+            }
+        }
+
+        private void SetState(string[] gameState)
+        {
+            for (int i = 0; i < gameState[0].Length; i++)
+            {
+                for (int j = 0; j < gameState.Length; j++)
+                {
+                    Cells[i, j].State = gameState[i][j] == '0' ? CellState.Dead : CellState.Live;
+                }
+            }
         }
 
         private Cell[,] GetBoardCopy()
         {
-            Cell[,] boardCopy = new Cell[this.width, this.height];
+            Cell[,] boardCopy = new Cell[width, height];
 
-            for (int x = 0; x < this.width; x++)
+            for (int x = 0; x < width; x++)
             {
-                for (int y = 0; y < this.height; y++)
+                for (int y = 0; y < height; y++)
                 {
                     boardCopy[x, y] = new Cell()
                     {
-                        Rectangle = new Rectangle() { Fill = this.Cells[x, y].Rectangle.Fill }
+                        Rectangle = new Rectangle() { Fill = Cells[x, y].Rectangle.Fill }
                     };
                 }
             }
@@ -133,20 +168,9 @@ namespace GameOfLife
 
         private int GetNumberOfLiveNeighbours(Cell[,] board, int cellX, int cellY)
         {
-            int counter = 0;
-
-            foreach (Point p in GetNeighboursCoords(cellX, cellY))
-            {
-                if (IsPointEligible(p))
-                {
-                    if (board[(int)p.X, (int)p.Y].State == CellState.Live)
-                    {
-                        counter++;
-                    }
-                }
-            }
-
-            return counter;
+            return GetNeighboursCoords(cellX, cellY)
+                .Where(p => p.X >= 0 && p.Y >= 0 && p.X < width && p.Y < height)
+                .Count(p => board[(int) p.X, (int) p.Y].State == CellState.Live);
         }
 
         private List<Point> GetNeighboursCoords(int x, int y)
@@ -163,11 +187,6 @@ namespace GameOfLife
             points.Add(new Point(x, y - 1));
 
             return points;
-        }
-
-        private bool IsPointEligible(Point p)
-        {
-            return p.X >= 0 && p.Y >= 0 && p.X < width && p.Y < height;
-        }
+        } 
     }
 }
