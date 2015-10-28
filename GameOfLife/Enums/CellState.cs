@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    enum CellState
+    [Flags]
+    public enum CellState
     {
-        Dead,
-        Live
+        None = 0x0,
+        Dead = 0x2,
+        Live = 0x4,
+        Dying = 0x8,
+        Newborn = 0x10
     }
 }

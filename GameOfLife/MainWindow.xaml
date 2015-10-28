@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameOfLife"
+        xmlns:userControls="clr-namespace:GameOfLife.UserControls"
         mc:Ignorable="d"
-        Title="Game Of Life" Height="800" Width="1280" ResizeMode="CanMinimize">
+        Title="Game Of Life" Height="860" Width="1400" ResizeMode="CanMinimize" x:Name="Window">
     
     <StackPanel Orientation="Vertical">
         
@@ -38,8 +39,8 @@
             <Label Grid.Column="0" Grid.Row="0" Content="ITERACJA " HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="16" FontWeight="Heavy"/>
             <Label Grid.Column="0" Grid.Row="1" Content="{Binding IterationCounter}" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="16" FontWeight="Medium"/>
         </Grid>
-        
-        <Grid x:Name="BoardGrid" Margin="10,10,10,20" HorizontalAlignment="Center" VerticalAlignment="Center" Background="DarkSalmon" />
+
+        <userControls:GameBoard x:Name="gBoard" ItemsSource="{Binding ElementName=Window, Path=DataContext.Cells, Mode=TwoWay}"></userControls:GameBoard>
 
         <Grid Margin="30,20,30,20" Background="Linen">
 
@@ -51,6 +52,10 @@
                 <ColumnDefinition Width="40"></ColumnDefinition>
                 <ColumnDefinition Width="16"></ColumnDefinition>
                 <ColumnDefinition Width="40"></ColumnDefinition>
+                <ColumnDefinition Width="80"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="150"></ColumnDefinition>
+                <ColumnDefinition Width="230"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -62,10 +67,16 @@
             <Button Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="5,5,5,5" Content="Czyść" Click="ButtonClear_OnClick" VerticalAlignment="Center" HorizontalAlignment="Right" Height="36" Width="150" FontSize="16" FontWeight="Heavy"></Button>
             <Label Grid.Column="3" Grid.Row="0" Content="Wymiary planszy:"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
             <Label Grid.Column="3" Grid.Row="1" Content="Wielkość skoku:" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
-            <Label Grid.Column="4" Grid.Row="0" Content="{Binding BoardWidth}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
+            <Label Grid.Column="4" Grid.Row="0" Content="{Binding Cells[0].Count}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
             <Label Grid.Column="5" Grid.Row="0" Content="x" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
-            <Label Grid.Column="6" Grid.Row="0" Content="{Binding BoardHeight}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
+            <Label Grid.Column="6" Grid.Row="0" Content="{Binding Cells.Count}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
             <Label Grid.Column="4" Grid.Row="1" Content="{Binding GenerationLeap}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
+
+            <Label Background="{Binding Source={x:Static local:Cell.BrushLive}, Mode=OneWay}" Grid.Column="8" Grid.Row="0" Content="Żywa" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
+            <Label Background="{Binding Source={x:Static local:Cell.BrushDead}, Mode=OneWay}" Grid.Column="8" Grid.Row="1" Content="Martwa" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
+            <Label Background="{Binding Source={x:Static local:Cell.BrushDying}, Mode=OneWay}" Grid.Column="9" Grid.Row="0" Content="Umierająca" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
+            <Label Background="{Binding Source={x:Static local:Cell.BrushNewborn}, Mode=OneWay}" Grid.Column="9" Grid.Row="1" Content="Nowonarodzona" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
+            <Label Background="{Binding Source={x:Static local:Cell.BrushNewbornDying}, Mode=OneWay}" Grid.Column="10" Grid.Row="0" Grid.RowSpan="2" Content="Nowonarodzona | Umierająca" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0" FontSize="14" FontWeight="Medium"/>
         </Grid>
         
     </StackPanel>

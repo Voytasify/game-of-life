@@ -19,8 +19,8 @@ namespace GameOfLife
     /// </summary>
     public partial class BoardDimDialogBox : Window
     {
-        public int Width => Convert.ToInt32(TextBoxWidth.Text);
-        public int Height => Convert.ToInt32(TextBoxHeight.Text);
+        public int BoardWidth => Convert.ToInt32(TextBoxWidth.Text);
+        public int BoardHeight => Convert.ToInt32(TextBoxHeight.Text);
 
         public BoardDimDialogBox(int width, int height)
         {

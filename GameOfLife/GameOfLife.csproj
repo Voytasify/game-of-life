@@ -56,6 +56,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="UserControls\GameBoard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserDialogBoxes\BoardDimDialogBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -72,13 +76,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Enums\DisplayMode.cs" />
+    <Compile Include="Converters\StateToBrushConverter.cs" />
+    <Compile Include="UserControls\GameBoard.xaml.cs">
+      <DependentUpon>GameBoard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserDialogBoxes\BoardDimDialogBox.xaml.cs">
       <DependentUpon>BoardDimDialogBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Cell.cs" />
+    <Compile Include="Model\Cell.cs" />
     <Compile Include="Enums\CellState.cs" />
-    <Compile Include="Utilities\GameBoard.cs" />
     <Compile Include="UserDialogBoxes\GenLeapDialogBox.xaml.cs">
       <DependentUpon>GenLeapDialogBox.xaml</DependentUpon>
     </Compile>
